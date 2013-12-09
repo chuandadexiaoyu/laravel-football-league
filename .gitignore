@@ -1,0 +1,17 @@
+# Laravel
+/bootstrap/compiled.php
+/vendor
+
+# Composer
+composer.phar
+composer.lock
+
+# PhpStorm
+.idea/
+
+# Packages
+_ide_helper.php
+
+# OS
+.DS_Store
+Thumbs.db
