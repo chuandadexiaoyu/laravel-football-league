@@ -1,4 +1,4 @@
-@extends('layouts.scaffold')
+@extends('layouts.master')
 
 @section('main')
 
@@ -14,7 +14,7 @@
         </li>
 
         <li>
-            {{ Form::input('number', 'team_id', null, array('class' => 'form-control', 'placeholder' => 'team id')) }}
+            {{ Form::select('team_id', $options); }}
         </li>
 
 		<li>
@@ -30,5 +30,3 @@
 @endif
 
 @stop
-
-

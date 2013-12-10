@@ -9,9 +9,12 @@ class PlayersController extends BaseController {
 	 */
 	protected $player;
 
-	public function __construct(Player $player)
+    protected $team;
+
+	public function __construct(Player $player, Team $team)
 	{
 		$this->player = $player;
+        $this->team = $team;
 	}
 
 	/**
@@ -22,8 +25,9 @@ class PlayersController extends BaseController {
 	public function index()
 	{
 		$players = $this->player->all();
+        $teams = $this->team->all();
 
-		return View::make('players.index', compact('players'));
+		return View::make('players.index', compact('players', 'teams'));
 	}
 
 	/**
@@ -33,7 +37,13 @@ class PlayersController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('players.create');
+        $teams = $this->team->all();
+
+        foreach ($teams as $team) {
+            $options[$team->id]= $team->name;
+        }
+
+		return View::make('players.create', compact('options'));
 	}
 
 	/**
@@ -68,8 +78,9 @@ class PlayersController extends BaseController {
 	public function show($id)
 	{
 		$player = $this->player->findOrFail($id);
+        $team = $this->team->findOrFail($player->team_id)->name;
 
-		return View::make('players.show', compact('player'));
+		return View::make('players.show', compact('player', 'team'));
 	}
 
 	/**
@@ -81,13 +92,18 @@ class PlayersController extends BaseController {
 	public function edit($id)
 	{
 		$player = $this->player->find($id);
+        $teams = $this->team->all();
 
-		if (is_null($player))
+        foreach ($teams as $team) {
+            $options[$team->id]= $team->name;
+        }
+
+        if (is_null($player))
 		{
 			return Redirect::route('players.index');
 		}
 
-		return View::make('players.edit', compact('player'));
+		return View::make('players.edit', compact('player', 'options'));
 	}
 
 	/**

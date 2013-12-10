@@ -1,4 +1,4 @@
-@extends('layouts.scaffold')
+@extends('layouts.master')
 
 @section('main')
 
@@ -10,7 +10,7 @@
 			<tr>
 				<th>First_name</th>
 				<th>Last_name</th>
-				<th>Team_id</th>
+				<th>Team</th>
                 <th>Edit</th>
                 <th>Delete</th>
 			</tr>
@@ -21,7 +21,7 @@
 				<tr>
 					<td>{{{ $player->first_name }}}</td>
 					<td>{{{ $player->last_name }}}</td>
-					<td>{{{ $player->team_id }}}</td>
+					<td>{{{ $teams->find($player->team_id)->name }}}</td>
                     <td>{{ link_to_route('players.edit', 'Edit', array($player->id), array('class' => 'btn btn-info')) }}</td>
                     <td>
                         {{ Form::open(array('method' => 'DELETE', 'route' => array('players.destroy', $player->id))) }}
