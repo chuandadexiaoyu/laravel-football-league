@@ -43,6 +43,13 @@ class PlayersController extends BaseController {
             $options[$team->id]= $team->name;
         }
 
+        //handle case when no teams are set, otherwise - Undefined variable: options
+        if (!isset($options))
+        {
+            return Redirect::route('players.index')
+                ->with('message', 'Please set some teams first.');
+        }
+
 		return View::make('players.create', compact('options'));
 	}
 
