@@ -2,12 +2,11 @@
 
 @section('main')
 
-
 {{ Form::open(array('route' => 'teams.store', 'class' => 'form-signin')) }}
     <h1>Create Team</h1>
 	<ul>
         <li>
-            {{ Form::text('name', 'Name', array('class' => 'form-control')) }}
+            {{ Form::text('name', null, array('class' => 'form-control', 'placeholder' => 'Team Name')) }}
         </li>
 
 		<li>

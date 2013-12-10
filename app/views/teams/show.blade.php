@@ -4,12 +4,12 @@
 
 <h1>Show Team</h1>
 
-<p>{{ link_to_route('teams.index', 'Return to all teams') }}</p>
-
-<table class="table table-striped table-bordered">
+<table class="table table-bordered table-hover">
 	<thead>
 		<tr>
 			<th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
 		</tr>
 	</thead>
 
@@ -25,5 +25,7 @@
 		</tr>
 	</tbody>
 </table>
+
+<p>{{ link_to_route('teams.index', 'Return to all teams', null, array('class' => 'btn btn-warning')) }}</p>
 
 @stop

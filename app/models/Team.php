@@ -7,7 +7,7 @@ class Team extends Eloquent {
  *
  *  http://laravel.com/docs/validation
  *
- * nqma da pravq podrobna validaciq
+ * nqma da pravq podrobna validaciq - bi trqbvalo da proverq za vida na simvolite
  *
  * ima i regex
  *
@@ -15,6 +15,11 @@ class Team extends Eloquent {
 	protected $guarded = array();
 
 	public static $rules = array(
-		'name' => 'required|unique:teams'
+		'name' => 'required|unique:teams|between:3,30'
 	);
+
+    public function players()
+    {
+        return $this->hasMany('Player');
+    }
 }

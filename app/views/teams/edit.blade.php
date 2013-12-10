@@ -6,12 +6,12 @@
     <h1>Edit Team</h1>
 	<ul>
         <li>
-            {{ Form::text('name', 'Name', array('class' => 'form-control')) }}
+            {{ Form::text('name', null, array('class' => 'form-control', 'placeholder' => 'Team Name')) }}
         </li>
 
 		<li>
 			{{ Form::submit('Update', array('class' => 'btn btn-info')) }}
-			{{ link_to_route('teams.show', 'Cancel', $team->id, array('class' => 'btn')) }}
+			{{ link_to_route('teams.show', 'Cancel', $team->id, array('class' => 'btn btn-default')) }}
 		</li>
 	</ul>
 {{ Form::close() }}
