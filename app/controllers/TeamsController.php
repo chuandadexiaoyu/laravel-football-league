@@ -11,6 +11,10 @@ class TeamsController extends BaseController {
 
 	public function __construct(Team $team)
 	{
+        // assign authentication filter, guests don't have access
+        $this->beforeFilter('auth');
+
+        // inject team, to avoid using static method
 		$this->team = $team;
 	}
 

@@ -13,6 +13,9 @@ class PlayersController extends BaseController {
 
 	public function __construct(Player $player, Team $team)
 	{
+        // assign authentication filter, guests don't have access
+        $this->beforeFilter('auth');
+
 		$this->player = $player;
         $this->team = $team;
 	}
