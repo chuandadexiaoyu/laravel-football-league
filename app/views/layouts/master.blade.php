@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/assets/css/style.css" rel="stylesheet">
+        {{ HTML::style('assets/css/bootstrap.min.css') }}
+        {{ HTML::style('assets/css/style.css') }}
 	</head>
 
 	<body>
