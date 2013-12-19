@@ -21,7 +21,13 @@
 				<tr>
 					<td>{{{ $player->first_name }}}</td>
 					<td>{{{ $player->last_name }}}</td>
-					<td>{{{ $teams->find($player->team_id)->name }}}</td>
+					<td>
+                        @if ($teams->contains($player->team_id))
+                        {{{ $teams->find($player->team_id)->name }}}
+                        @else
+                        Team doesn't exist
+                        @endif
+                    </td>
                     <td>{{ link_to_route('players.edit', 'Edit', array($player->id), array('class' => 'btn btn-info')) }}</td>
                     <td>
                         {{ Form::open(array('method' => 'DELETE', 'route' => array('players.destroy', $player->id))) }}

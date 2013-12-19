@@ -90,6 +90,12 @@ class PlayersController extends BaseController {
 		$player = $this->player->find($id);
         $teams = $this->team->all();
 
+        if ($teams->isEmpty())
+        {
+            return Redirect::route('players.index')
+                ->with('message', 'Please set some teams first.');
+        }
+
         foreach ($teams as $team) {
             $options[$team->id]= $team->name;
         }
