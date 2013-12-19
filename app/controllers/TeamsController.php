@@ -97,7 +97,7 @@ class TeamsController extends BaseController {
 			$team = $this->team->find($id);
 			$team->update($input);
 
-			return Redirect::route('teams.show', $id);
+			return Redirect::route('teams.index');
 		}
 
 		return Redirect::route('teams.edit', $id)

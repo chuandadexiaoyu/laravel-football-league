@@ -124,7 +124,7 @@ class PlayersController extends BaseController {
 			$player = $this->player->find($id);
 			$player->update($input);
 
-			return Redirect::route('players.show', $id);
+			return Redirect::route('players.index');
 		}
 
 		return Redirect::route('players.edit', $id)
