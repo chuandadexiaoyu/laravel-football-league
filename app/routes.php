@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', array('before' => 'auth', function()
+Route::get('/', array('as' => 'home', 'before' => 'auth', function()
 {
-	return View::make('home');
+	return Redirect::to('teams');
 }));
 
 Route::resource('teams', 'TeamsController');

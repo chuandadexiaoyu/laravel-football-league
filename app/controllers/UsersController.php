@@ -4,7 +4,12 @@ class UsersController extends BaseController {
 
     public function __construct() {
         $this->beforeFilter('csrf', array('on'=>'post'));
+
+        //Dashboard is protected from not authenticated users
         $this->beforeFilter('auth', array('only'=>array('getDashboard')));
+
+        //only guests allowed to Login and Register pages, only Logout is active to authenticated users
+        $this->beforeFilter('guest', array('except'=>array('getLogout')));
     }
 
     public function getRegister() {
@@ -22,7 +27,9 @@ class UsersController extends BaseController {
 
             return Redirect::to('users/login')->with('message', 'Thanks for registering!');
         } else {
-            return Redirect::to('users/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+            return Redirect::to('users/register')
+                ->with('message', 'The following errors occurred')
+                ->withErrors($validator)->withInput();
         }
     }
 

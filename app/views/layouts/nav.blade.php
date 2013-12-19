@@ -1,7 +1,7 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            {{ HTML::link('/', 'Championship Manager 01/02', array('class' => 'navbar-brand')) }}
+            {{ HTML::link('/', 'Championship Manager', array('class' => 'navbar-brand')) }}
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">

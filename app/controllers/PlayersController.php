@@ -80,20 +80,6 @@ class PlayersController extends BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$player = $this->player->findOrFail($id);
-        $team = $this->team->findOrFail($player->team_id)->name;
-
-		return View::make('players.show', compact('player', 'team'));
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id

@@ -18,7 +18,7 @@
 
 		<li>
 			{{ Form::submit('Update', array('class' => 'btn btn-info')) }}
-			{{ link_to_route('players.show', 'Cancel', $player->id, array('class' => 'btn btn-default')) }}
+            {{ link_to_route('players.index', 'Cancel', null, array('class' => 'btn btn-warning')) }}
 		</li>
 	</ul>
 {{ Form::close() }}

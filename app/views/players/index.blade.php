@@ -8,8 +8,8 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>First_name</th>
-				<th>Last_name</th>
+				<th>First Name</th>
+				<th>Last Name</th>
 				<th>Team</th>
                 <th>Edit</th>
                 <th>Delete</th>

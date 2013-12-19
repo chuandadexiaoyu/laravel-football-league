@@ -64,19 +64,6 @@ class TeamsController extends BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$team = $this->team->findOrFail($id);
-
-		return View::make('teams.show', compact('team'));
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
