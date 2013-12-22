@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'championship_laravel',
+			'database'  => 'football_league',
 			'username'  => 'xenon',
 			'password'  => '333',
 			'charset'   => 'utf8',

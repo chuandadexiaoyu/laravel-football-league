@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', array('as' => 'home', 'before' => 'auth', function()
+Route::get('/', function()
 {
 	return Redirect::to('teams');
-}));
+});
 
 Route::resource('teams', 'TeamsController');
 
