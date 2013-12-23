@@ -13,11 +13,12 @@ class CreatePlayersTable extends Migration {
 	public function up()
 	{
 		Schema::create('players', function(Blueprint $table) {
-			$table->increments('id');
+			$table->increments('id')->unsigned();
 			$table->string('first_name');
 			$table->string('last_name');
-			$table->integer('team_id');
+			$table->integer('team_id')->nullable()->unsigned();
 			$table->timestamps();
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('set null');
 		});
 	}
 
