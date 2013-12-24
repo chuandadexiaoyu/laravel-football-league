@@ -20,6 +20,7 @@ class PlayersController extends BaseController {
 	public function index()
 	{
 		$players = $this->player->all();
+        //TODO load only teams with players
         $teams = $this->team->all();
 
 		return View::make('players.index', compact('players', 'teams'));

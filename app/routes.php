@@ -24,5 +24,5 @@ Route::group(array('before' => 'auth'), function()
 
     Route::resource('players', 'PlayersController', array('except' => array('show')));
 
-    Route::resource('games', 'GamesController', array('except' => array('show')));
+    Route::resource('games', 'GamesController', array('except' => array('create', 'show')));
 });

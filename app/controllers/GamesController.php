@@ -28,22 +28,7 @@ class GamesController extends BaseController {
                 ->with('message', 'Teams must be divided by 4 (4, 8, 16, 32, 40) for the purpose of tournament');
         }
 
-        foreach ($teams as $team) {
-
-        }
-
-
         return View::make('games.index', compact('games', 'teams'));
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return View::make('games.create');
 	}
 
 	/**
@@ -63,7 +48,7 @@ class GamesController extends BaseController {
 			return Redirect::route('games.index');
 		}
 
-		return Redirect::route('games.create')
+		return Redirect::route('games.index')
 			->withInput()
 			->withErrors($validation)
 			->with('message', 'There were validation errors.');
