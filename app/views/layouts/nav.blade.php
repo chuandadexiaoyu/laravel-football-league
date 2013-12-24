@@ -8,6 +8,7 @@
                 @if (Auth::check())
                 <li>{{ HTML::link('teams', 'Teams') }}</li>
                 <li>{{ HTML::link('players', 'Players') }}</li>
+                <li>{{ HTML::link('games', 'Games') }}</li>
                 @endif
             </ul>
 

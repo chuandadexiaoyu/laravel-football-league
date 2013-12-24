@@ -2,20 +2,12 @@
 
 class PlayersController extends BaseController {
 
-	/**
-	 * Player Repository
-	 *
-	 * @var Player
-	 */
 	protected $player;
 
     protected $team;
 
 	public function __construct(Player $player, Team $team)
 	{
-        // assign authentication filter, guests don't have access
-        $this->beforeFilter('auth');
-
 		$this->player = $player;
         $this->team = $team;
 	}
