@@ -18,7 +18,8 @@ class CreatePlayersTable extends Migration {
 			$table->string('last_name');
 			$table->integer('team_id')->unsigned()->nullable();
 			$table->timestamps();
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('set null');
+            // Set relations into database - create problems (seeding, ...)
+            //$table->foreign('team_id')->references('id')->on('teams')->onDelete('set null');
 		});
 	}
 
