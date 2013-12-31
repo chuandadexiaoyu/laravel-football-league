@@ -44,6 +44,11 @@ body {
     border-top-right-radius: 0;
 }
 
+.form-signin select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
 .form-signin ul {
     padding-left: 0px;
 }

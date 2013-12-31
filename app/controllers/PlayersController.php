@@ -85,12 +85,8 @@ class PlayersController extends BaseController {
 
         if ($teams->isEmpty())
         {
-            return Redirect::route('players.index')
+            return Redirect::route('teams.index')
                 ->with('message', 'Please set some teams first.');
-        }
-
-        foreach ($teams as $team) {
-            $options[$team->id]= $team->name;
         }
 
         if (is_null($player))
@@ -98,7 +94,11 @@ class PlayersController extends BaseController {
 			return Redirect::route('players.index');
 		}
 
-		return View::make('players.edit', compact('player', 'options'));
+        foreach ($teams as $team) {
+            $options[$team->id]= $team->name;
+        }
+
+        return View::make('players.edit', compact('player', 'options'));
 	}
 
 	/**
