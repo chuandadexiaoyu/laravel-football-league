@@ -19,6 +19,7 @@
 
 		<tbody>
 			@foreach ($games as $game)
+            @if ($game->host_team_id && $game->guest_team_id)
 				<tr>
 					<td>{{{ $teams->find($game->host_team_id)->name }}}</td>
                     <td>{{{ $game->host_score }}} : {{{ $game->guest_score }}}</td>
@@ -31,6 +32,7 @@
                         {{ Form::close() }}
                     </td>
 				</tr>
+            @endif
 			@endforeach
 		</tbody>
 	</table>
@@ -38,4 +40,13 @@
 	There are no games
 @endif
 
+{{ Form::open(array('route' => 'games.store')) }}
+{{ Form::submit('Reset Championship', array('class' => 'btn btn-info')) }}
+{{ Form::close() }}
+
+@if ($errors->any())
+<ul>
+    {{ implode('', $errors->all('<li class="error">:message</li>')) }}
+</ul>
+@endif
 @stop

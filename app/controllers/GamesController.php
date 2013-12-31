@@ -22,12 +22,6 @@ class GamesController extends BaseController {
 		$games = $this->game->all();
         $teams = $this->team->all();
 
-        if  ($this->team->count() % 4 != 0)
-        {
-            return Redirect::route('teams.index')
-                ->with('message', 'Teams must be divided by 4 (4, 8, 16, 32, 40) for the purpose of tournament');
-        }
-
         return View::make('games.index', compact('games', 'teams'));
 	}
 
@@ -38,20 +32,32 @@ class GamesController extends BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		$validation = Validator::make($input, Game::$rules);
+        $teams = $this->team->all();
 
-		if ($validation->passes())
-		{
-			$this->game->create($input);
+        if ($teams->isEmpty())
+        {
+            return Redirect::route('teams.index')
+                ->with('message', 'Please set some teams first.');
+        }
 
-			return Redirect::route('games.index');
-		}
+        // validate if team count is 2^x
+        $valid_teams = log($this->team->count()) / log(2);
+        if ($valid_teams != floor($valid_teams))
+        {
+            return Redirect::route('teams.index')
+                ->with('message', 'Teams must be 2^n (like: 4, 8, 16, 32 ...) for the purpose of tournament');
+        }
 
-		return Redirect::route('games.index')
-			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+        DB::table('games')->delete();
+
+        $root = Game::create(array('time' => '2013-12-29 19:59:33'));
+
+//        while ($root->getLeaves()->count() <= $teams->count())
+//        {
+//
+//        }
+
+        return Redirect::route('games.index');
 	}
 
 	/**

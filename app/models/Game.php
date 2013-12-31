@@ -1,6 +1,7 @@
 <?php
+use Baum\Node;
 
-class Game extends Eloquent {
+class Game extends Node {
 	protected $guarded = array();
 
 	public static $rules = array(

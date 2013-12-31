@@ -20,10 +20,10 @@ class CreateGamesTable extends Migration {
             $table->integer('rgt')->nullable();
             $table->integer('depth')->nullable();
 
-			$table->string('host_team_id');
-			$table->string('guest_team_id');
-			$table->integer('host_score');
-			$table->integer('guest_score');
+			$table->string('host_team_id')->nullable();
+			$table->string('guest_team_id')->nullable();
+			$table->integer('host_score')->default(0);
+			$table->integer('guest_score')->default(0);
 			$table->dateTime('time');
 			$table->timestamps();
 
