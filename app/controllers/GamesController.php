@@ -40,22 +40,30 @@ class GamesController extends BaseController {
                 ->with('message', 'Please set some teams first.');
         }
 
-        // validate if team count is 2^x
-        $valid_teams = log($this->team->count()) / log(2);
-        if ($valid_teams != floor($valid_teams))
+        // validate if team count is 2^x series. Finds x and check if it's a natural number
+        $x = log($this->team->count()) / log(2);
+        if ($x != floor($x))
         {
             return Redirect::route('teams.index')
-                ->with('message', 'Teams must be 2^n (like: 4, 8, 16, 32 ...) for the purpose of tournament');
+                ->with('message', 'Teams must be 2^x (like: 4, 8, 16, 32 ...) for the purpose of tournament');
         }
 
         DB::table('games')->delete();
 
-        $root = Game::create(array('time' => '2013-12-29 19:59:33'));
+        // generate root element = the final game
+        $root = Game::create(array('time' => '2013-12-12 20:00:00'));
 
-//        while ($root->getLeaves()->count() <= $teams->count())
-//        {
-//
-//        }
+        $depth = 1;
+        // until depth becomes x from 2^x series, populates the nested set
+        while ($depth <= $x)
+        {
+            // build nodes by depth. First time - 2 rounds, next - 4 rounds, 8 ... until half of the teams at the end
+            for ($i = 0; $i < pow(2, $depth); $i++)
+            {
+                $child1 = $root->children()->create(['host_score' => $i, 'time' => '2013-12-12 16:00:00']);
+            }
+            $depth++;
+        }
 
         return Redirect::route('games.index');
 	}
