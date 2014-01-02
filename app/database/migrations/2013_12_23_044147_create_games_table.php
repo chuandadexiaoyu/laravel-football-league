@@ -24,7 +24,7 @@ class CreateGamesTable extends Migration {
 			$table->string('guest_team_id')->nullable();
 			$table->integer('host_score')->default(0);
 			$table->integer('guest_score')->default(0);
-			$table->dateTime('time');
+			$table->dateTime('time')->default('0000-00-00 00:00:00');
 			$table->timestamps();
 
             $table->index('parent_id');

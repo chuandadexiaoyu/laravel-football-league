@@ -6,7 +6,7 @@ class TeamsTableSeeder extends Seeder {
 	{
 		DB::table('teams')->delete();
 
-		$teams = array(
+        $teams = array(
             array(
                 'name' => 'Real Madrid',
                 'created_at' => new DateTime,
@@ -27,10 +27,29 @@ class TeamsTableSeeder extends Seeder {
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime,
             ),
+            array(
+                'name' => 'Milan',
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+            ),
+            array(
+                'name' => 'Ajax',
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+            ),
+            array(
+                'name' => 'Juventus',
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+            ),
+            array(
+                'name' => 'Porto',
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+            ),
+        );
 
-		);
-
-		DB::table('teams')->insert($teams);
+        DB::table('teams')->insert($teams);
 	}
 
 }

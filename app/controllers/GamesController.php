@@ -52,15 +52,30 @@ class GamesController extends BaseController {
 
         // generate root element = the final game
         $root = Game::create(array('time' => '2013-12-12 20:00:00'));
+        // array with root's children
+        $nodes = array();
 
+        // until depth is smaller than x from 2^x series, populates the nested set
         $depth = 1;
-        // until depth becomes x from 2^x series, populates the nested set
         while ($depth <= $x)
         {
-            // build nodes by depth. First time - 2 rounds, next - 4 rounds, 8 ... until half of the teams at the end
-            for ($i = 0; $i < pow(2, $depth); $i++)
+            if ($depth == 1)
             {
-                $child1 = $root->children()->create(['host_score' => $i, 'time' => '2013-12-12 16:00:00']);
+                // add 2 children for root
+                $nodes[] = $root->children()->create(array('host_score' => $depth));
+                $nodes[] = $root->children()->create(array('host_score' => $depth));
+            }
+            else
+            {
+                // using $temp for resetting $nodes every while loop (for each depth)
+                $temp = array();
+                foreach ($nodes as $node)
+                {
+                    // add 2 children for every other node
+                    $temp[] = $node->children()->create(array('host_score' => $depth));
+                    $temp[] = $node->children()->create(array('host_score' => $depth));
+                }
+                $nodes = $temp;
             }
             $depth++;
         }
