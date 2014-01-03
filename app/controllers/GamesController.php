@@ -62,8 +62,8 @@ class GamesController extends BaseController {
             if ($depth == 1)
             {
                 // add 2 children for root
-                $nodes[] = $root->children()->create(array('host_score' => $depth));
-                $nodes[] = $root->children()->create(array('host_score' => $depth));
+                $nodes[] = $root->children()->create(array('time' => '2013-12-12 20:00:00'));
+                $nodes[] = $root->children()->create(array('time' => '2013-12-12 20:00:00'));
             }
             else
             {
@@ -72,13 +72,14 @@ class GamesController extends BaseController {
                 foreach ($nodes as $node)
                 {
                     // add 2 children for every other node
-                    $temp[] = $node->children()->create(array('host_score' => $depth));
-                    $temp[] = $node->children()->create(array('host_score' => $depth));
+                    $temp[] = $node->children()->create(array('time' => '2013-12-12 20:00:00'));
+                    $temp[] = $node->children()->create(array('time' => '2013-12-12 20:00:00'));
                 }
                 $nodes = $temp;
             }
             $depth++;
         }
+        //TODO add team names into leaves, can be done directly into foreach loop upside. Decide.
 
         return Redirect::route('games.index');
 	}
