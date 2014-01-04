@@ -57,7 +57,7 @@ class GamesController extends BaseController {
 
         // until depth is smaller than x from 2^x series, populates the nested set
         $depth = 1;
-        while ($depth <= $x)
+        while ($depth < $x)
         {
             if ($depth == 1)
             {
