@@ -50,24 +50,19 @@ class GamesController extends BaseController {
 
         DB::table('games')->delete();
 
-        // generate root element = the final game
-        $root = Game::create(array('time' => '2013-12-12 20:00:00'));
-        // array with root's children
         $nodes = array();
 
         // until depth is smaller than x from 2^x series, populates the nested set
-        $depth = 1;
-        while ($depth < $x)
+        for ($depth = 0; $depth < $x; $depth++)
         {
-            if ($depth == 1)
+            if ($depth == 0)
             {
-                // add 2 children for root
-                $nodes[] = $root->children()->create(array('time' => '2013-12-12 20:00:00'));
-                $nodes[] = $root->children()->create(array('time' => '2013-12-12 20:00:00'));
+                // generate root element = the final game
+                $nodes[] = Game::create(array('time' => '2013-12-12 20:00:00'));
             }
             else
             {
-                // using $temp for resetting $nodes every while loop (for each depth)
+                // using $temp array because of resetting $nodes array at every loop
                 $temp = array();
                 foreach ($nodes as $node)
                 {
@@ -77,7 +72,6 @@ class GamesController extends BaseController {
                 }
                 $nodes = $temp;
             }
-            $depth++;
         }
         //TODO add team names into leaves, can be done directly into foreach loop upside. Decide.
 
