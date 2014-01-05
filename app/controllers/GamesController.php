@@ -26,7 +26,7 @@ class GamesController extends BaseController {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a games with teams id's into database.
 	 *
 	 * @return Response
 	 */
@@ -57,6 +57,7 @@ class GamesController extends BaseController {
         {
             if ($depth == 0)
             {
+                //TODO set time intervals - game(15 + 10 + 15) + break(10) = 50min, 8 teams / day = 400min
                 // generate root element = the final game
                 $nodes[] = Game::create(array('time' => '2013-12-12 20:00:00'));
             }
@@ -64,16 +65,35 @@ class GamesController extends BaseController {
             {
                 // using $temp array because of resetting $nodes array at every loop
                 $temp = array();
-                foreach ($nodes as $node)
+                foreach ($nodes as $key => $value)
                 {
-                    // add 2 children for every other node
-                    $temp[] = $node->children()->create(array('time' => '2013-12-12 20:00:00'));
-                    $temp[] = $node->children()->create(array('time' => '2013-12-12 20:00:00'));
+                    if ($depth != $x - 1)
+                    {
+                        // add 2 children for every other node
+                        $temp[] = $value->children()->create(array('time' => '2013-12-12 20:00:00'));
+                        $temp[] = $value->children()->create(array('time' => '2013-12-12 20:00:00'));
+                    }
+                    else
+                    {
+                        // insert teams into leaf nodes
+                        $i = $key * 4; // in every loop $i is four times bigger - pattern (0, 4, 8, 12)
+
+                        $temp[] = $value->children()->create(array(
+                            'host_team_id' => $teams[$i]->id,
+                            'guest_team_id' => $teams[$i + 1]->id,
+                            'time' => '2010-12-12 20:00:00'
+                        ));
+
+                        $temp[] = $value->children()->create(array(
+                            'host_team_id' => $teams[$i + 2]->id,
+                            'guest_team_id' => $teams[$i + 3]->id,
+                            'time' => '2010-12-12 20:00:00'
+                        ));
+                    }
                 }
                 $nodes = $temp;
             }
         }
-        //TODO add team names into leaves, can be done directly into foreach loop upside. Decide.
 
         return Redirect::route('games.index');
 	}
